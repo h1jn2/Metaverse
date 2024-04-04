@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ public class Character_Controller : MonoBehaviour
 
     [Range(0, 10f)]
     public float f_RunSpeed;
+    
+    [Range(0, 10f)]
+    public float f_JumpSpeed;
 
     [Range(0, 100f)]
     public float f_RotateSpeed;
@@ -21,9 +25,15 @@ public class Character_Controller : MonoBehaviour
     public GameObject obj_Body;
     public GameObject obj_Cam_First, obj_Cam_Quarter;
 
+    private bool _isJump;
+    private bool _isGround;
+
+    public bool _startarea;
+    
     // Start is called before the first frame update
     private void Start()
     {
+        _startarea = false;
         if (GetComponent<PhotonView>().IsMine)
         {
             obj_Cam_First.SetActive(false);
@@ -45,6 +55,7 @@ public class Character_Controller : MonoBehaviour
         {
             float pos_x = Input.GetAxis("Horizontal");
             float pos_z = Input.GetAxis("Vertical");
+            
 
             //달리기 ON&OFF
             if (Input.GetKey(KeyCode.LeftShift))
@@ -109,6 +120,13 @@ public class Character_Controller : MonoBehaviour
                         //transform.Rotate(new Vector3(0f, 45f, 0f));
                     }
                 }
+                //시소타기
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    //시소타는 액션
+                }
+                
+                
 
                 m_Animator.SetBool("Walk", true);
                 if (m_Animator.GetBool("Run"))
@@ -125,10 +143,20 @@ public class Character_Controller : MonoBehaviour
             {
                 m_Animator.SetBool("Walk", false);
             }
-
+            //점프하기
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 m_Animator.SetTrigger("Jump");
+                //transform.Translate(new Vector3(pos_x, f_JumpSpeed*10, pos_z) * Time.deltaTime * f_MoveSpeed);
+                if(!_isJump)
+                {
+                    m_Animator.SetTrigger("Jump");
+                    _isJump = true;
+                    _isGround = false;
+                    Debug.Log("점프실행");
+
+                }
+                
             }
 
             if (Input.GetMouseButton(1))
@@ -138,6 +166,21 @@ public class Character_Controller : MonoBehaviour
                 //obj_Rotate_Horizontal.transform.eulerAngles += new Vector3(0, rot_y, 0) * f_RotateSpeed;
                 transform.eulerAngles += new Vector3(0, rot_y, 0) * f_RotateSpeed;
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("시작영역 출입");
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            _isJump = false;
+            _isGround = true;
+
         }
     }
 }

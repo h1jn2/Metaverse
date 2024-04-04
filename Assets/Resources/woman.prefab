@@ -294,6 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 909166797633768785}
+  - component: {fileID: 3665194622131069134}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -325,6 +326,28 @@ Transform:
   - {fileID: 7158467645281210925}
   m_Father: {fileID: 2922747280981462839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &3665194622131069134
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118589891863991437}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2497106002754787046, guid: 575bf1738311f6647915ebf1ff536e55, type: 3}
 --- !u!1 &227398254750715565
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,6 +971,8 @@ GameObject:
   - component: {fileID: 1542356141746554044}
   - component: {fileID: 9051695123267112027}
   - component: {fileID: 2544245718933454327}
+  - component: {fileID: 4400129119715735652}
+  - component: {fileID: -4799335474696310978}
   m_Layer: 0
   m_Name: woman
   m_TagString: Untagged
@@ -1007,13 +1032,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 1771385290943370853}
   f_MoveSpeed: 5
-  f_RunSpeed: 5
+  f_RunSpeed: 3
+  f_JumpSpeed: 3
   f_RotateSpeed: 5
   obj_Rotate_Horizontal: {fileID: 1450533788}
   obj_Rotate_Vertical: {fileID: 1926766017}
   obj_Body: {fileID: 118589891863991437}
   obj_Cam_First: {fileID: 493073314}
   obj_Cam_Quarter: {fileID: 674177946}
+  _startarea: 0
 --- !u!114 &1542356141746554044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,6 +1111,55 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
+--- !u!64 &4400129119715735652
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2577325101096883597}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3305173264901752035, guid: 540181d611b0c7b41857f8528ff44401, type: 3}
+--- !u!54 &-4799335474696310978
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2577325101096883597}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2700089535007063054
 GameObject:
   m_ObjectHideFlags: 0
