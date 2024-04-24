@@ -147,15 +147,26 @@ public class Character_Controller : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 m_Animator.SetTrigger("Jump");
-                //transform.Translate(new Vector3(pos_x, f_JumpSpeed*10, pos_z) * Time.deltaTime * f_MoveSpeed);
-                if(!_isJump)
+                transform.Translate(new Vector3(0, f_JumpSpeed*10, 0) * Time.deltaTime * f_MoveSpeed);
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    m_Animator.SetTrigger("Jump");
-                    _isJump = true;
-                    _isGround = false;
-                    Debug.Log("점프실행");
-
+                    if (_isGround) // 캐릭터가 땅 위에 있는지 확인합니다.
+                    {
+                        m_Animator.SetTrigger("Jump");
+                        _isJump = true;
+                        _isGround = false;
+                        Debug.Log("점프 실행됨");
+                    }
                 }
+        {
+            if (_isGround) // 캐릭터가 땅 위에 있는지 확인합니다.
+            {
+                m_Animator.SetTrigger("Jump");
+                _isJump = true;
+                _isGround = false;
+                Debug.Log("점프 실행됨");
+            }
+        }
                 
             }
 
@@ -183,4 +194,5 @@ public class Character_Controller : MonoBehaviour
 
         }
     }
+    
 }
