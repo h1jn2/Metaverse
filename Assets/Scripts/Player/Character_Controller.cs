@@ -194,5 +194,17 @@ public class Character_Controller : MonoBehaviour
 
         }
     }
-    
+
+    IEnumerator Roca(Vector3 before , Vector3 after, float settime)
+    {
+        float timer =0;
+        while (timer<settime)
+        {
+            timer += Time.deltaTime;
+            Vector3 vec = Vector3.Lerp(before, after, timer/settime);
+            obj_Body.transform.localEulerAngles = vec;
+            yield return null;
+        }
+      
+    }
 }

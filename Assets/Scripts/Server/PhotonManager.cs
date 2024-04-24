@@ -15,6 +15,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public GameObject obj_local;
     public static PhotonManager instance;
     public bool isLoading;
+    public static AsyncOperation SceneLoingsync;
 
 
     //게임을 실행중 포톤매니저는 무조건 하나만 있어야되기때문에 싱클톤으로 실행
@@ -66,16 +67,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     private void CreateRoom()
     {
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 4;
-        PhotonNetwork.CreateRoom("Capstone", roomOptions, TypedLobby.Default);
+        roomOptions.MaxPlayers = 10;
+        PhotonNetwork.CreateRoom("Metaverse", roomOptions, TypedLobby.Default);
     }
     
     //방입장
     private void JoinRoom()
     {
         RoomOptions roomOption = new RoomOptions();
-        roomOption.MaxPlayers = 4;
-        PhotonNetwork.JoinOrCreateRoom("Capstone", roomOption, TypedLobby.Default);
+        roomOption.MaxPlayers = 10;
+        PhotonNetwork.JoinOrCreateRoom("Metaverse", roomOption, TypedLobby.Default);
     }
 
     //스테이지에 플레이어 생성
@@ -99,8 +100,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             Debug.Log("마스터 클라이언트가 아닙니다.");
             return;
         }
-        Debug.Log(PhotonNetwork.LevelLoadingProgress);
-        PhotonNetwork.LoadLevel("School");
+
+        SceneLoingsync = SceneManager.LoadSceneAsync("Scenes/World");
     }
 
     private void Spawn_item()
@@ -133,7 +134,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         {
             m_CreatePlayer(LocalDate);
         }
-        
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
@@ -193,19 +193,21 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         _coroutineCreatePlayer = StartCoroutine(IEnum_CreatePlayer());
     }
+
     
     IEnumerator IEnum_CreatePlayer()
     {
+            
         int cnt=0;
         Debug.Log("코루틴 시작");
-        while (PhotonNetwork.LevelLoadingProgress < 1f)
+        while (SceneLoingsync.progress < 1f)
         {
             if (cnt > 10000)
             {
                 Debug.LogError("스폰불가");
                 yield break;
             }
-            Debug.Log(PhotonNetwork.LevelLoadingProgress);
+            Debug.Log(SceneLoingsync.progress);
             cnt++;
             yield return null;
         }
