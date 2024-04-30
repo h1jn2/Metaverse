@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -150,6 +150,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4579454407841743219, guid: 2bc18718d6408424c83d2dc5d08cef94, type: 3}
+--- !u!114 &60323543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60323538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d28bdc43684d43dc9e8bee3a4fe025f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+  curTime: 0
 --- !u!1 &642375589 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7029948723529949830, guid: 2bc18718d6408424c83d2dc5d08cef94, type: 3}
@@ -377,6 +391,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: siso_39
       objectReference: {fileID: 0}
+    - target: {fileID: 5148817236446094103, guid: 2bc18718d6408424c83d2dc5d08cef94, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -393,6 +411,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5148817236446094103, guid: 2bc18718d6408424c83d2dc5d08cef94, type: 3}
       insertIndex: -1
       addedObject: {fileID: 60323542}
+    - targetCorrespondingSourceObject: {fileID: 5148817236446094103, guid: 2bc18718d6408424c83d2dc5d08cef94, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 60323543}
   m_SourcePrefab: {fileID: 100100000, guid: 2bc18718d6408424c83d2dc5d08cef94, type: 3}
 --- !u!1001 &7001770422803968917
 PrefabInstance:

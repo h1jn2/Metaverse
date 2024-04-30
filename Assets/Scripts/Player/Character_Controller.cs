@@ -29,6 +29,8 @@ public class Character_Controller : MonoBehaviour
     private bool _isGround;
 
     public bool _startarea;
+
+    private PlayerManager pm;
     
     // Start is called before the first frame update
     private void Start()
@@ -39,6 +41,7 @@ public class Character_Controller : MonoBehaviour
             obj_Cam_First.SetActive(false);
             obj_Cam_Quarter.SetActive(true);
             this.gameObject.name += "(LocalPlayer)";
+            pm = GetComponent<PlayerManager>();
         }
         else
         {
@@ -70,7 +73,7 @@ public class Character_Controller : MonoBehaviour
             //걷기 ON&OFF 및 캐릭터 이동
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
-                Debug.Log(new Vector2(pos_x, pos_z));
+                //Debug.Log(new Vector2(pos_x, pos_z));
                 if (pos_x > 0)
                 {
                     if (pos_z > 0)
@@ -183,6 +186,11 @@ public class Character_Controller : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log("시작영역 출입");
+
+        if (other.gameObject.tag == "Ground")
+        {
+            pm.Pstatus = PlayerManager.status._ready;
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -191,6 +199,7 @@ public class Character_Controller : MonoBehaviour
         {
             _isJump = false;
             _isGround = true;
+            pm.Pstatus = PlayerManager.status._none;
 
         }
     }
