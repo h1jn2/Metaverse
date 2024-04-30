@@ -9,19 +9,26 @@ public class GyeondoManager : MonoBehaviour
     [SerializeField] private float curTime;
 
     private int second;
-    private GameObject[] player;
+    [SerializeField]
+    private List<GameObject> playerCollisions;
+    private int player_cnt;
 
     private bool isPlaying;
+    private PlayerManager pm;
+    private IEnumerator startGameTimer;
 
     void Start()
     {
+        startGameTimer = GameStartTimer();
     }
 
     void Update()
     {
-
-
-
+        if (playerCollisions.Count > 0)
+        {
+            time = 3;
+            StartCoroutine(startGameTimer);
+        }
     }
 
     IEnumerator GameStartTimer()
@@ -49,13 +56,26 @@ public class GyeondoManager : MonoBehaviour
     private void StartGyeondo()
     {
         isPlaying = true;
+        
     }
 
-    private void OnCollisionStay(Collision other)
+    private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerCollisions.Add(collision.gameObject);
+            
+        }
 
     }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerCollisions.Remove(collision.gameObject);
 
+        }
+    }
 
 
 }
