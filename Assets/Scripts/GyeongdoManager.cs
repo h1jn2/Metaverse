@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.Linq;
 
 public class GyeondoManager : MonoBehaviour
 {
@@ -17,9 +18,19 @@ public class GyeondoManager : MonoBehaviour
     private PlayerManager pm;
     private IEnumerator startGameTimer;
 
+    public static List<GameObject> Shuffle(List<GameObject> values)
+    {
+        System.Random rand = new System.Random();
+        var shuffled = values.OrderBy(_ => rand.Next()).ToList();
+
+        return shuffled;
+    }
+
     void Start()
     {
-        startGameTimer = GameStartTimer();
+        startGameTimer = GameTimerCoroutine();
+
+
     }
 
     void Update()
@@ -31,7 +42,7 @@ public class GyeondoManager : MonoBehaviour
         }
     }
 
-    IEnumerator GameStartTimer()
+    IEnumerator GameTimerCoroutine()
     {
         curTime = time;
         while (curTime > 0)
@@ -46,18 +57,39 @@ public class GyeondoManager : MonoBehaviour
             if (curTime <= 0)
             {
                 Debug.Log("경도 시작");
-                StartGyeondo();
+                SettingGame();
                 curTime = 0;
                 yield break;
             }
         }
     }
 
-    private void StartGyeondo()
+    private void SettingGame()
     {
         isPlaying = true;
+        List<GameObject> shufflePlayer = Shuffle(playerCollisions);
+
+        for (int i = 0; i < shufflePlayer.Count; i++) {
+            if (i == shufflePlayer.Count % 2 - 1)
+            {
+                shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.polic;
+            }
+            else
+            {
+                shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.theif;
+            }
+            shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._playing;
+        }
+
+    }
+
+
+
+    private void StartGyeondo()
+    {
         
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -68,6 +100,9 @@ public class GyeondoManager : MonoBehaviour
         }
 
     }
+
+    
+
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -76,6 +111,6 @@ public class GyeondoManager : MonoBehaviour
 
         }
     }
-
-
 }
+
+
