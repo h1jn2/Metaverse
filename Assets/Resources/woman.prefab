@@ -1009,9 +1009,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 1771385290943370853}
+  rb: {fileID: 0}
+  pv: {fileID: 0}
   f_MoveSpeed: 5
   f_RunSpeed: 3
-  f_JumpSpeed: 0
+  f_JumpPower: 5
   f_RotateSpeed: 5
   obj_Rotate_Horizontal: {fileID: 1450533788}
   obj_Rotate_Vertical: {fileID: 1926766017}
