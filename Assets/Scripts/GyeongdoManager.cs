@@ -6,17 +6,12 @@ using System.Linq;
 
 public class GyeondoManager : MonoBehaviour
 {
-    [SerializeField] private float time;
-    [SerializeField] private float curTime;
-
-    private int second;
     [SerializeField]
     private List<GameObject> playerCollisions;
-    private int player_cnt;
-
+    [SerializeField]
+    private float playTime = 1000f;
     private bool isPlaying;
-    private PlayerManager pm;
-    private IEnumerator startGameTimer;
+    private float time = 0;
 
     public static List<GameObject> Shuffle(List<GameObject> values)
     {
@@ -26,51 +21,42 @@ public class GyeondoManager : MonoBehaviour
         return shuffled;
     }
 
-    void Start()
-    {
-        startGameTimer = GameTimerCoroutine();
 
-
-    }
-
-    void Update()
+    private void Update()
     {
         if (playerCollisions.Count > 0)
         {
-            time = 3;
-            StartCoroutine(startGameTimer);
+            StartTimer(5f);
         }
     }
 
-    IEnumerator GameTimerCoroutine()
+    private void StartTimer(float setTimer)
     {
-        curTime = time;
-        while (curTime > 0)
+        time += Time.deltaTime;
+
+        if (time > setTimer)
         {
-            curTime -= Time.deltaTime;
-            second = (int)curTime % 60;
-
-            Debug.Log(second);
-
-            yield return null;
-
-            if (curTime <= 0)
+            if (!isPlaying)
             {
-                Debug.Log("경도 시작");
-                SettingGame();
-                curTime = 0;
-                yield break;
+                SettingStartGame();
             }
+            else
+            {
+                SettingEndGame();
+            }
+            
         }
     }
 
-    private void SettingGame()
+    private void SettingStartGame()
     {
-        isPlaying = true;
+        Debug.Log("SettingStartGame()");
+
         List<GameObject> shufflePlayer = Shuffle(playerCollisions);
 
-        for (int i = 0; i < shufflePlayer.Count; i++) {
-            if (i == shufflePlayer.Count % 2 - 1)
+        for (int i = 0; i < shufflePlayer.Count; i++)
+        {
+            if (i % 2 == 0)
             {
                 shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.polic;
             }
@@ -78,16 +64,44 @@ public class GyeondoManager : MonoBehaviour
             {
                 shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.theif;
             }
-            shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._playing;
+            shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._hideseek;
         }
+        
+
+        StartGyeondo();
 
     }
 
-
-
     private void StartGyeondo()
     {
-        
+        Debug.Log("StartGyeongdo()");
+
+        isPlaying = true;
+        time = 0;
+        StartCoroutine(RandomRespawn.instance.spawnCoroutine);
+        StartTimer(playTime);
+
+    }
+
+    private void SettingEndGame()
+    {
+        Debug.Log("SettingEndGame()");
+
+        for (int i = 0; i < playerCollisions.Count; i++)
+        {
+            playerCollisions[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.none;
+            playerCollisions[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
+        }
+
+        GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
+        for (int i = 0; i < items.Length; i++)
+        {
+            Destroy(items[i]);
+        }
+        time = 0;
+        isPlaying = false;
+        StopCoroutine(RandomRespawn.instance.spawnCoroutine);
+        playerCollisions.Clear();
     }
 
 
@@ -96,20 +110,19 @@ public class GyeondoManager : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             playerCollisions.Add(collision.gameObject);
-            
+            collision.gameObject.GetComponent<PlayerManager>().Pstatus = PlayerManager.status._ready;
         }
-
     }
-
-    
 
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             playerCollisions.Remove(collision.gameObject);
-
+            collision.gameObject.GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
+            
         }
+
     }
 }
 
