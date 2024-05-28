@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Character_Controller : MonoBehaviour
 {
+    public static int catchCount;
+
     public Animator m_Animator;
 
     [Range(0, 10f)]
@@ -187,22 +189,21 @@ public class Character_Controller : MonoBehaviour
     {
         Debug.Log("시작영역 출입");
 
-        if (other.gameObject.tag == "Ground")
+
+        if (other.gameObject.tag == "Player")
         {
-            pm.Pstatus = PlayerManager.status._ready;
+            if (other.gameObject.GetComponent<PlayerManager>().Pstatus == PlayerManager.status._hideseek)
+            {
+                if (this.gameObject.GetComponent<PlayerManager>().Pjob == PlayerManager.job.polic && other.gameObject.GetComponent<PlayerManager>().Pjob == PlayerManager.job.theif)
+                {
+                    other.gameObject.GetComponent<PlayerManager>().Pjob = PlayerManager.job.none;
+                    catchCount++;
+                }
+            }
         }
+
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            _isJump = false;
-            _isGround = true;
-            pm.Pstatus = PlayerManager.status._none;
-
-        }
-    }
 
     IEnumerator Roca(Vector3 before , Vector3 after, float settime)
     {

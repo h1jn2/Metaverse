@@ -14,6 +14,8 @@ public class GyeondoManager : MonoBehaviour
     [SerializeField]
     private float time = 0;
 
+    private int thiefCount;
+
     public static List<GameObject> Shuffle(List<GameObject> values)
     {
         System.Random rand = new System.Random();
@@ -25,13 +27,17 @@ public class GyeondoManager : MonoBehaviour
 
     private void Update()
     {
-        if (playerCollisions.Count > 0 && !isPlaying)
+        if (playerCollisions.Count > 1 && !isPlaying)
         {
             StartTimer(5f);
         }
         if (isPlaying)
         {
             StartTimer(playTime);
+        }
+        if (thiefCount != 0 && Character_Controller.catchCount == thiefCount)
+        {
+            SettingEndGame();
         }
     }
 
@@ -68,6 +74,7 @@ public class GyeondoManager : MonoBehaviour
             else
             {
                 shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.theif;
+                thiefCount++;
             }
             shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._hideseek;
         }
@@ -82,7 +89,8 @@ public class GyeondoManager : MonoBehaviour
         Debug.Log("StartGyeongdo()");
         isPlaying = true;
         time = 0;
-        StartCoroutine(RandomRespawn.instance.spawnCoroutine);        
+        StartCoroutine(RandomRespawn.instance.spawnCoroutine);
+        
     }
 
     private void SettingEndGame()
@@ -111,8 +119,12 @@ public class GyeondoManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerCollisions.Add(collision.gameObject);
-            collision.gameObject.GetComponent<PlayerManager>().Pstatus = PlayerManager.status._ready;
+            if (!isPlaying)
+            {
+                playerCollisions.Add(collision.gameObject);
+                collision.gameObject.GetComponent<PlayerManager>().Pstatus = PlayerManager.status._ready;
+            }
+           
         }
     }
 
@@ -120,8 +132,11 @@ public class GyeondoManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerCollisions.Remove(collision.gameObject);
-            collision.gameObject.GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
+            if (!isPlaying)
+            {
+                playerCollisions.Remove(collision.gameObject);
+                collision.gameObject.GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
+            }
             
         }
 

@@ -43,7 +43,7 @@ public class RandomRespawn : MonoBehaviour
                 Debug.LogWarning("지형을 감지하지 못했습니다. 프리팹을 생성하지 않습니다." + randomPosition);
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
         }
         
     }
