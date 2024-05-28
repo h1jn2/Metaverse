@@ -9,8 +9,9 @@ public class GyeondoManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> playerCollisions;
     [SerializeField]
-    private float playTime = 1000f;
+    private float playTime;
     private bool isPlaying;
+    [SerializeField]
     private float time = 0;
 
     public static List<GameObject> Shuffle(List<GameObject> values)
@@ -24,16 +25,20 @@ public class GyeondoManager : MonoBehaviour
 
     private void Update()
     {
-        if (playerCollisions.Count > 0)
+        if (playerCollisions.Count > 0 && !isPlaying)
         {
             StartTimer(5f);
+        }
+        if (isPlaying)
+        {
+            StartTimer(playTime);
         }
     }
 
     private void StartTimer(float setTimer)
     {
         time += Time.deltaTime;
-
+        Debug.Log(playTime + ", " + isPlaying);
         if (time > setTimer)
         {
             if (!isPlaying)
@@ -75,18 +80,15 @@ public class GyeondoManager : MonoBehaviour
     private void StartGyeondo()
     {
         Debug.Log("StartGyeongdo()");
-
         isPlaying = true;
         time = 0;
-        StartCoroutine(RandomRespawn.instance.spawnCoroutine);
-        StartTimer(playTime);
-
+        StartCoroutine(RandomRespawn.instance.spawnCoroutine);        
     }
 
     private void SettingEndGame()
     {
         Debug.Log("SettingEndGame()");
-
+        
         for (int i = 0; i < playerCollisions.Count; i++)
         {
             playerCollisions[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.none;

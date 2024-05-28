@@ -163,7 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollisions: []
-  playTime: 300
+  playTime: 10
+  time: 0
 --- !u!1 &633501206
 GameObject:
   m_ObjectHideFlags: 0
