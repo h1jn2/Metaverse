@@ -946,6 +946,7 @@ GameObject:
   - component: {fileID: 1771385290943370853}
   - component: {fileID: 1771385290943370854}
   - component: {fileID: -2332278436484554684}
+  - component: {fileID: 9117896936227561931}
   - component: {fileID: 1542356141746554044}
   - component: {fileID: 9051695123267112027}
   - component: {fileID: 2544245718933454327}
@@ -953,7 +954,7 @@ GameObject:
   - component: {fileID: 6713202152487270461}
   m_Layer: 0
   m_Name: woman
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1036,6 +1037,18 @@ MonoBehaviour:
   pv: {fileID: 1542356141746554044}
   Pstatus: 0
   Pjob: 0
+--- !u!114 &9117896936227561931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2577325101096883597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9ef01aa6f54429da6e79db98cce060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1542356141746554044
 MonoBehaviour:
   m_ObjectHideFlags: 0
