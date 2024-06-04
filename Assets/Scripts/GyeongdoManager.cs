@@ -92,7 +92,7 @@ public class GyeondoManager : MonoBehaviour
         
     }
 
-    private void SettingEndGame()
+    public void SettingEndGame()
     {
         Debug.Log("SettingEndGame()");
         
@@ -100,6 +100,7 @@ public class GyeondoManager : MonoBehaviour
         {
             playerCollisions[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.none;
             playerCollisions[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
+            playerCollisions[i].GetComponent<PickUpItem>().itemCount = 0;
         }
 
         GameObject[] items = GameObject.FindGameObjectsWithTag("Item");

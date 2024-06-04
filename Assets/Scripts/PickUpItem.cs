@@ -5,12 +5,18 @@ using UnityEngine;
 public class PickUpItem : MonoBehaviour
 {
     public int itemCount;
+    private GameObject gyeongdoMng;
+
+    private void Start()
+    {
+        gyeongdoMng = GameObject.Find("Plane.001");
+    }
 
     private void Update()
     {
         if (itemCount == 5)
         {
-
+            gyeongdoMng.GetComponent<GyeondoManager>().SettingEndGame();
         }
     }
 
@@ -20,12 +26,8 @@ public class PickUpItem : MonoBehaviour
         {
             if (GetComponent<PlayerManager>().Pjob == PlayerManager.job.theif)
             {
-                Item item = other.GetComponent<Item>();
-
                 Destroy(other.gameObject);
                 itemCount++;
-                Debug.Log(itemCount);
-
             }
         }
     }
