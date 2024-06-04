@@ -9,15 +9,17 @@ public class Character_Controller : MonoBehaviour
     public static int catchCount;
 
     public Animator m_Animator;
+    public Rigidbody rb;
+    public PhotonView pv;
 
     [Range(0, 10f)]
     public float f_MoveSpeed;
 
     [Range(0, 10f)]
     public float f_RunSpeed;
-    
-    [Range(0, 10f)]
-    public float f_JumpSpeed;
+
+    [Range(0, 20f)]
+    public float f_JumpPower;
 
     [Range(0, 100f)]
     public float f_RotateSpeed;
@@ -27,23 +29,28 @@ public class Character_Controller : MonoBehaviour
     public GameObject obj_Body;
     public GameObject obj_Cam_First, obj_Cam_Quarter;
 
+    float jumpForce;
+
     private bool _isJump;
     private bool _isGround;
 
     public bool _startarea;
 
-    private PlayerManager pm;
-    
+    private void Awake()
+    {
+        pv = this.GetComponent<PhotonView>();
+        rb = this.GetComponent<Rigidbody>();
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
         _startarea = false;
-        if (GetComponent<PhotonView>().IsMine)
+        if (pv.IsMine)
         {
             obj_Cam_First.SetActive(false);
             obj_Cam_Quarter.SetActive(true);
             this.gameObject.name += "(LocalPlayer)";
-            pm = GetComponent<PlayerManager>();
         }
         else
         {
@@ -56,11 +63,11 @@ public class Character_Controller : MonoBehaviour
     // Update is called once per frame
     private void LateUpdate()
     {
-        if (GetComponent<PhotonView>().IsMine)
+        if (pv.IsMine)
         {
             float pos_x = Input.GetAxis("Horizontal");
             float pos_z = Input.GetAxis("Vertical");
-            
+
 
             //달리기 ON&OFF
             if (Input.GetKey(KeyCode.LeftShift))
@@ -75,7 +82,7 @@ public class Character_Controller : MonoBehaviour
             //걷기 ON&OFF 및 캐릭터 이동
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
-                //Debug.Log(new Vector2(pos_x, pos_z));
+                Debug.Log(new Vector2(pos_x, pos_z));
                 if (pos_x > 0)
                 {
                     if (pos_z > 0)
@@ -130,8 +137,8 @@ public class Character_Controller : MonoBehaviour
                 {
                     //시소타는 액션
                 }
-                
-                
+
+
 
                 m_Animator.SetBool("Walk", true);
                 if (m_Animator.GetBool("Run"))
@@ -151,30 +158,16 @@ public class Character_Controller : MonoBehaviour
             //점프하기
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                m_Animator.SetTrigger("Jump");
-                transform.Translate(new Vector3(0, f_JumpSpeed*10, 0) * Time.deltaTime * f_MoveSpeed);
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (_isGround) // 캐릭터가 땅 위에 있는지 확인합니다.
                 {
-                    if (_isGround) // 캐릭터가 땅 위에 있는지 확인합니다.
-                    {
-                        m_Animator.SetTrigger("Jump");
-                        _isJump = true;
-                        _isGround = false;
-                        Debug.Log("점프 실행됨");
-                    }
+                    m_Animator.SetTrigger("Jump");
+                    _isJump = true;
+                    _isGround = false;
+                    jumpForce = f_JumpPower * Time.deltaTime;
+                    rb.AddForce(Vector3.up * f_JumpPower, ForceMode.Impulse);
+                    Debug.Log("점프 실행됨");
                 }
-        {
-            if (_isGround) // 캐릭터가 땅 위에 있는지 확인합니다.
-            {
-                m_Animator.SetTrigger("Jump");
-                _isJump = true;
-                _isGround = false;
-                Debug.Log("점프 실행됨");
             }
-        }
-                
-            }
-
             if (Input.GetMouseButton(1))
             {
                 float rot_x = Input.GetAxis("Mouse Y");
@@ -188,8 +181,12 @@ public class Character_Controller : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log("시작영역 출입");
-
-
+        if (other.gameObject.tag == "Ground")
+        {
+            _isJump = false;
+            _isGround = true;
+            rb.angularVelocity = Vector3.zero;
+        }
         if (other.gameObject.tag == "Player")
         {
             if (other.gameObject.GetComponent<PlayerManager>().Pstatus == PlayerManager.status._hideseek)
@@ -201,20 +198,28 @@ public class Character_Controller : MonoBehaviour
                 }
             }
         }
-
     }
 
-
-    IEnumerator Roca(Vector3 before , Vector3 after, float settime)
+    private void OnCollisionExit(Collision collision)
     {
-        float timer =0;
-        while (timer<settime)
+        if (collision.gameObject.tag == "Ground")
+        {
+            _isJump = true;
+            _isGround = false;
+
+        }
+    }
+
+    IEnumerator Roca(Vector3 before, Vector3 after, float settime)
+    {
+        float timer = 0;
+        while (timer < settime)
         {
             timer += Time.deltaTime;
-            Vector3 vec = Vector3.Lerp(before, after, timer/settime);
+            Vector3 vec = Vector3.Lerp(before, after, timer / settime);
             obj_Body.transform.localEulerAngles = vec;
             yield return null;
         }
-      
+
     }
 }

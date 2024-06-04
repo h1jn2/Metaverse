@@ -1014,7 +1014,7 @@ MonoBehaviour:
   pv: {fileID: 0}
   f_MoveSpeed: 5
   f_RunSpeed: 3
-  f_JumpPower: 5
+  f_JumpPower: 6
   f_RotateSpeed: 5
   obj_Rotate_Horizontal: {fileID: 1450533788}
   obj_Rotate_Vertical: {fileID: 1926766017}
@@ -1049,6 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9ef01aa6f54429da6e79db98cce060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemCount: 0
 --- !u!114 &1542356141746554044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,7 +1069,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -2332278436484554684}
   - {fileID: 9051695123267112027}
   - {fileID: 2544245718933454327}
   sceneViewId: 0

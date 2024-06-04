@@ -4,8 +4,7 @@ using UnityEngine;
 
 public enum ItemType
 {
-    PoliceItem,
-    ThiefItem
+    Treasure,
 }
 
 public class Item : MonoBehaviour

@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Unity.VisualScripting;
 
-public class PlayerManager : MonoBehaviourPun, IPunObservable, IPunInstantiateMagicCallback
+public class PlayerManager : MonoBehaviourPun
 {
     public PhotonView pv;
     public enum status
@@ -22,43 +22,19 @@ public class PlayerManager : MonoBehaviourPun, IPunObservable, IPunInstantiateMa
         theif
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(Pstatus);
-            stream.SendNext(Pjob);
-        }
-        else if (stream.IsReading)
-        {
-            stream.ReceiveNext();
-            stream.ReceiveNext();
-        }
-    }
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        info.Sender.TagObject = gameObject;
-    }
-
     public status Pstatus;
     public job Pjob;
 
     void Start()
     {
-        
+
     }
-    
+
     void Update()
     {
         if (pv.IsMine)
         {
-            
-        }
-    }
 
-    public void InvokeProperties()
-    {
-        Pstatus = Pstatus;
-        Pjob = Pjob;
+        }
     }
 }

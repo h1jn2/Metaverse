@@ -8,8 +8,7 @@ public class GyeondoManager : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> playerCollisions;
-    [SerializeField]
-    private float playTime;
+    private float playTime = 300f;
     private bool isPlaying;
     [SerializeField]
     private float time = 0;
@@ -27,7 +26,7 @@ public class GyeondoManager : MonoBehaviour
 
     private void Update()
     {
-        if (playerCollisions.Count > 1 && !isPlaying)
+        if (playerCollisions.Count > 0 && !isPlaying)
         {
             StartTimer(5f);
         }
@@ -44,7 +43,7 @@ public class GyeondoManager : MonoBehaviour
     private void StartTimer(float setTimer)
     {
         time += Time.deltaTime;
-        Debug.Log(playTime + ", " + isPlaying);
+
         if (time > setTimer)
         {
             if (!isPlaying)
