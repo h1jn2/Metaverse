@@ -30,9 +30,10 @@ public class Character_Controller : MonoBehaviour
     public GameObject obj_Cam_First, obj_Cam_Quarter;
 
     float jumpForce;
-
+    
     private bool _isJump;
     private bool _isGround;
+    private bool _isSitting;
 
     public bool _startarea;
 
@@ -82,7 +83,7 @@ public class Character_Controller : MonoBehaviour
             //걷기 ON&OFF 및 캐릭터 이동
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
-                Debug.Log(new Vector2(pos_x, pos_z));
+                //Debug.Log(new Vector2(pos_x, pos_z));
                 if (pos_x > 0)
                 {
                     if (pos_z > 0)
@@ -158,7 +159,7 @@ public class Character_Controller : MonoBehaviour
             //점프하기
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (_isGround) // 캐릭터가 땅 위에 있는지 확인합니다.
+                if (_isGround && !_isJump) // 캐릭터가 땅 위에 있는지 확인합니다.
                 {
                     m_Animator.SetTrigger("Jump");
                     _isJump = true;
@@ -180,14 +181,14 @@ public class Character_Controller : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("시작영역 출입");
-        if (other.gameObject.tag == "Ground")
+        
+        if (other.gameObject.CompareTag("Ground"))
         {
             _isJump = false;
             _isGround = true;
             rb.angularVelocity = Vector3.zero;
         }
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             if (other.gameObject.GetComponent<PlayerManager>().Pstatus == PlayerManager.status._hideseek)
             {
@@ -200,9 +201,17 @@ public class Character_Controller : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Seesaw"))
+        {
+            Debug.Log("시소 접촉");
+        }
+    }
+
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.CompareTag("Ground"))
         {
             _isJump = true;
             _isGround = false;

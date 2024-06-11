@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8835827316710809312}
   m_Layer: 0
   m_Name: siso1
-  m_TagString: Untagged
+  m_TagString: Seesaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 6769980432359384927}
   m_Layer: 0
   m_Name: SeesawTrigger
-  m_TagString: Untagged
+  m_TagString: Seesaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +158,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.05, y: 0.05, z: 0.1}
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2803246180099704653
 GameObject:
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 3603567060993485535}
   m_Layer: 0
   m_Name: Seesaw
-  m_TagString: Untagged
+  m_TagString: Seesaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 7486874765372001581}
   m_Layer: 0
   m_Name: SeesawTrigger
-  m_TagString: Untagged
+  m_TagString: Seesaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +296,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.05, y: 0.05, z: 0.1}
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5617203383639601947
 GameObject:
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 6529047673104861991}
   m_Layer: 0
   m_Name: SeesawTrigger (1)
-  m_TagString: Untagged
+  m_TagString: Seesaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,7 +349,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.05, y: 0.05, z: 0.1}
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5922133034048913763
 GameObject:
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 5032905207298769067}
   m_Layer: 0
   m_Name: siso2
-  m_TagString: Untagged
+  m_TagString: Seesaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 2770337122218643662}
   m_Layer: 0
   m_Name: SeesawTrigger (1)
-  m_TagString: Untagged
+  m_TagString: Seesaw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -509,5 +509,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.05, y: 0.05, z: 0.1}
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}

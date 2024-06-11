@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class RandomRespawn : MonoBehaviour
@@ -13,6 +14,8 @@ public class RandomRespawn : MonoBehaviour
     [SerializeField]
     private List<GameObject> item_prefabs;
 
+    private PhotonView pv;
+
     private void Awake()
     {
         if (null == instance)
@@ -23,6 +26,7 @@ public class RandomRespawn : MonoBehaviour
         }
         rangeCollider = rangeObject.GetComponent<BoxCollider>();
         spawnCoroutine = SpawnPrefabs();
+        pv = this.gameObject.GetPhotonView();
     }
 
     public IEnumerator SpawnPrefabs()
@@ -41,7 +45,8 @@ public class RandomRespawn : MonoBehaviour
                 {
                     // 충돌 지점에 프리팹 생성
                     Debug.Log("hit");
-                    item_prefabs.Add(Instantiate(prefab, new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.identity));
+                    PhotonManager.instance.SpawnItem(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z));
+                    //item_prefabs.Add(Instantiate(prefab, new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z), Quaternion.identity));
                     yield return new WaitForSeconds(15f);
                 }
                 else

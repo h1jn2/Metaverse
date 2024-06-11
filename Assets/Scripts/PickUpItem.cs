@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class PickUpItem : MonoBehaviour
@@ -26,7 +27,9 @@ public class PickUpItem : MonoBehaviour
         {
             if (GetComponent<PlayerManager>().Pjob == PlayerManager.job.theif)
             {
-                Destroy(other.gameObject);
+                PhotonView ipv = other.gameObject.GetPhotonView();
+                ipv.RPC("Destroy_RPC",RpcTarget.All);
+                //Destroy(other.gameObject);
                 itemCount++;
             }
         }
