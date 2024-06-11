@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.Linq;
+using Unity.Properties;
 
 public class GyeondoManager : MonoBehaviour
 {
@@ -66,16 +67,20 @@ public class GyeondoManager : MonoBehaviour
 
         for (int i = 0; i < shufflePlayer.Count; i++)
         {
+            PhotonView Setpv = shufflePlayer[i].GetPhotonView();
             if (i % 2 == 0)
             {
-                shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.polic;
+                Setpv.RPC("SetJob_RPC",RpcTarget.All, PlayerManager.job.polic);
+                //shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.polic;
             }
             else
             {
-                shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.theif;
+                Setpv.RPC("SetJob_RPC",RpcTarget.All, PlayerManager.job.theif);
+                //shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.theif;
                 thiefCount++;
             }
-            shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._hideseek;
+            Setpv.RPC("SetStatus_RPC",RpcTarget.All,PlayerManager.status._hideseek);
+            //shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._hideseek;
         }
         
 

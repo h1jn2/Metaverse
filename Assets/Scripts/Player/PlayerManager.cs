@@ -32,9 +32,16 @@ public class PlayerManager : MonoBehaviourPun
 
     void Update()
     {
-        if (pv.IsMine)
-        {
+    }
 
-        }
+    [PunRPC]
+    public void SetJob_RPC(job input)
+    {
+        this.Pjob = input;
+    }
+    [PunRPC]
+    public void SetStatus_RPC(status input)
+    {
+        this.Pstatus = input;
     }
 }
