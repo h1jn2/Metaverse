@@ -103,15 +103,21 @@ public class GyeondoManager : MonoBehaviour
         
         for (int i = 0; i < playerCollisions.Count; i++)
         {
-            playerCollisions[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.none;
-            playerCollisions[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
+            PhotonView Setpv = playerCollisions[i].GetPhotonView();
+            Setpv.RPC("SetJob_RPC",RpcTarget.All,PlayerManager.job.none);
+            Setpv.RPC("SetStatus_RPC",RpcTarget.All,PlayerManager.status._none);
+            
+            //playerCollisions[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.none;
+            //playerCollisions[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
             playerCollisions[i].GetComponent<PickUpItem>().itemCount = 0;
         }
 
         GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         for (int i = 0; i < items.Length; i++)
         {
-            Destroy(items[i]);
+            PhotonView ipv = items[i].GetPhotonView();
+            ipv.RPC("Destroy_RPC",RpcTarget.All);
+            //Destroy(items[i]);
         }
         time = 0;
         isPlaying = false;
