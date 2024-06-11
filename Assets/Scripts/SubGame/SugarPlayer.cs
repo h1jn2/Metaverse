@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private DalgonaManager gameManager;
+    private SugarManager SugarManager;
     private bool isMoving = false;
 
     private Rigidbody2D rb;
 
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<DalgonaManager>();
+        SugarManager = GameObject.FindGameObjectWithTag("SugarManager").GetComponent<SugarManager>();
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
     }
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         {
             if (isMoving)
             {
-                gameManager.GameOver();
+                SugarManager.GameOver();
             }
             isMoving = false;
         }
@@ -36,6 +36,6 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        gameManager.GameOver();
+        SugarManager.GameOver();
     }
 }
