@@ -104,9 +104,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         SceneLoingsync = SceneManager.LoadSceneAsync("Scenes/World");
     }
 
-    public void SpawnItem(Vector3 position)
+    public GameObject SpawnItem(Vector3 position)
     {
-        PhotonNetwork.Instantiate(list_Prefabs[1].name, position, Quaternion.identity);
+        return PhotonNetwork.Instantiate(list_Prefabs[1].name, position, Quaternion.identity);
     }
 
     private void Spawn_item()
