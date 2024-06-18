@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,8 +24,7 @@ public class GyeondoManager : MonoBehaviour
 
         return shuffled;
     }
-
-
+    
     private void Update()
     {
         if (playerCollisions.Count > 0 && !isPlaying)
