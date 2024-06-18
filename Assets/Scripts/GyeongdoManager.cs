@@ -93,7 +93,7 @@ public class GyeondoManager : MonoBehaviour
         Debug.Log("StartGyeongdo()");
         isPlaying = true;
         time = 0;
-        StartCoroutine(RandomRespawn.instance.spawnCoroutine);
+        StartCoroutine(RandomRespawn.instance.SpawnPrefabs());
         
     }
 
@@ -121,7 +121,7 @@ public class GyeondoManager : MonoBehaviour
         }
         time = 0;
         isPlaying = false;
-        StopCoroutine(RandomRespawn.instance.spawnCoroutine);
+        StopCoroutine(RandomRespawn.instance.SpawnPrefabs());
         playerCollisions.Clear();
     }
 
