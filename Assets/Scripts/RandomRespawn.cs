@@ -25,48 +25,40 @@ public class RandomRespawn : MonoBehaviour
         }
         rangeCollider = rangeObject.GetComponent<BoxCollider>();
         pv = this.gameObject.GetPhotonView(); 
-        if (!PhotonNetwork.IsMasterClient) 
-        { 
-            this.gameObject.SetActive(false);
-        }
+        
     }
 
     public IEnumerator SpawnPrefabs()
     {
         while (true)
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                float range_X = rangeCollider.bounds.size.x;
-                float range_Z = rangeCollider.bounds.size.z;
+            float range_X = rangeCollider.bounds.size.x; 
+            float range_Z = rangeCollider.bounds.size.z;
 
-                Vector3 randomPosition = new Vector3(Random.Range(-range_X / 2, range_X / 2), 100f, Random.Range(-range_Z / 2, range_Z / 2));
+            Vector3 randomPosition = new Vector3(Random.Range(-range_X / 2, range_X / 2), 100f, Random.Range(-range_Z / 2, range_Z / 2));
 
-                RaycastHit hit;
-                if (Physics.Raycast(randomPosition, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
+            RaycastHit hit;
+            if (Physics.Raycast(randomPosition, Vector3.down, out hit, Mathf.Infinity, terrainLayer))
+            { 
+                if (item_prefabs.Count < 3)
                 {
-                    if (item_prefabs.Count < 3)
-                    {
                         // 충돌 지점에 프리팹 생성
-                        Debug.Log("hit");
-                        //PhotonManager.instance.SpawnItem(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z));
-                        item_prefabs.Add(PhotonManager.instance.SpawnItem(new Vector3(hit.point.x, hit.point.y, hit.point.z)));
-                        yield return new WaitForSeconds(15f);
-                    }
-                    else
-                    {
-                        PhotonNetwork.Destroy(item_prefabs[0]);
-                        item_prefabs.RemoveAt(0);
-                    }
-                
+                    Debug.Log("hit");
+                    //PhotonManager.instance.SpawnItem(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z));
+                    item_prefabs.Add(PhotonManager.instance.SpawnItem(new Vector3(hit.point.x, hit.point.y, hit.point.z)));
+                    yield return new WaitForSeconds(15f);
                 }
                 else
                 {
-                    Debug.LogWarning("지형을 감지하지 못했습니다. 프리팹을 생성하지 않습니다." + randomPosition);
-                }    
+                    PhotonNetwork.Destroy(item_prefabs[0]);
+                    item_prefabs.RemoveAt(0);
+                }
+                
             }
-            
+            else
+            { 
+                Debug.LogWarning("지형을 감지하지 못했습니다. 프리팹을 생성하지 않습니다." + randomPosition);
+            } 
         }
-        
     }
 }
