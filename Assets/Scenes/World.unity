@@ -332,6 +332,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube.016 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4037524317049154392, guid: 5c286f0b705ac164796e499944cce8d0, type: 3}
+      propertyPath: m_TagString
+      value: Dalgona
+      objectReference: {fileID: 0}
     - target: {fileID: 8345554999084644811, guid: 5c286f0b705ac164796e499944cce8d0, type: 3}
       propertyPath: m_LocalScale.x
       value: 61.8
@@ -453,6 +457,10 @@ PrefabInstance:
     - target: {fileID: 4037524317049154392, guid: 5c286f0b705ac164796e499944cce8d0, type: 3}
       propertyPath: m_Name
       value: Cube.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 4037524317049154392, guid: 5c286f0b705ac164796e499944cce8d0, type: 3}
+      propertyPath: m_TagString
+      value: Dalgona
       objectReference: {fileID: 0}
     - target: {fileID: 8345554999084644811, guid: 5c286f0b705ac164796e499944cce8d0, type: 3}
       propertyPath: m_LocalScale.x
@@ -1369,6 +1377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollisions: []
   time: 0
+  isWatting: 0
   UIManager: {fileID: 4905308946919881860, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
 --- !u!64 &6697621764703351598
 MeshCollider:

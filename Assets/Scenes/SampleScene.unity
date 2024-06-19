@@ -326,8 +326,8 @@ Transform:
   m_GameObject: {fileID: 430485802}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 794.3, y: 576.9, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 786, y: 386, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -473,6 +473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dalgonaPrefabs:
   - {fileID: 2933012643494626135, guid: fcd7de3e9736a10428ba5214c9cba782, type: 3}
+  - {fileID: 8734813349327982364, guid: 1f4d7ec47949f194abc0f7887043de5a, type: 3}
+  - {fileID: 4329045623180090917, guid: 0fe1bcb234343314c892de520a67ea58, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

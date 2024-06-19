@@ -209,6 +209,22 @@ public class Character_Controller : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Dalgona"))
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                other.GetComponent<DalgonaAtiveManager>().LoadSceneAdditive();
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                other.GetComponent<DalgonaAtiveManager>().UnLoadScenceAdditive();
+            }
+            
+        }
+    }
+
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))

@@ -6,8 +6,10 @@ public class PlayerControl : MonoBehaviour
 {
     private GameManager gameManager;
     private bool isMoving = false;
-    private Vector2 initialPosition;
-    private int checkpointCount = 0;
+    private bool gameStarted = false;
+
+    private Vector2 startPosition;
+    private float passedCheckpointsCnt = 0;
 
     private Rigidbody2D rb;
 
@@ -20,50 +22,45 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isMoving)
+        if (Input.GetMouseButton(0))
         {
-            initialPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            isMoving = true;
-        }
+            if (!gameStarted)
+            {
+                startPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                gameStarted = true;
+            }
 
-        if (isMoving)
-        {
+            isMoving = true;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mousePosition;
 
-            if (checkpointCount >= 4 && IsBackToStart())
+            Debug.Log("Passed Checkpoints: " + passedCheckpointsCnt);
+        }
+        else
+        {
+            if (isMoving)
             {
-                Debug.Log(checkpointCount);
-                Debug.Log(transform.position);
-                gameManager.GameClear();
+                gameManager.GameOver();
             }
-            else
-            {
-                if (isMoving)
-                {
-                    gameManager.GameOver();
-                }
+            isMoving = false;
+        }
 
-                isMoving = false;
-
-            }
+        if (gameStarted && passedCheckpointsCnt >= 4 && Vector2.Distance(transform.position, startPosition) < 15f)
+        {
+            gameManager.GameClear();
         }
     }
-
+ 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("CheckPoint"))
         {
-            checkpointCount++;
+            passedCheckpointsCnt++;
         }
-        else
+
+        if (other.CompareTag("Wall"))
         {
             gameManager.GameOver();
-    }
-}
-
-    bool IsBackToStart()
-    {
-        return Vector2.Distance(initialPosition, transform.position) < 1f;
+        }
     }
 }

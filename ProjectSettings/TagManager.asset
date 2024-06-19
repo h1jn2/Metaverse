@@ -9,6 +9,9 @@ TagManager:
   - Seesaw
   - GameManager
   - SugarManager
+  - CheckPoint
+  - Wall
+  - Dalgona
   layers:
   - Default
   - TransparentFX

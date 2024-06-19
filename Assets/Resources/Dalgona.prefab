@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 7839155536801893639}
   - component: {fileID: 3406138470082907750}
   - component: {fileID: 7192902298347577039}
+  - component: {fileID: 3774521859880115117}
   m_Layer: 0
   m_Name: Dalgona
   m_TagString: Untagged
@@ -446,12 +447,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.019999998, y: 0.033086307, z: 0.042300753}
-  m_Center: {x: 0.000000029938107, y: 0.000050677656, z: 0.011150379}
+  m_Size: {x: 0.043631725, y: 0.033086307, z: 0.042300753}
+  m_Center: {x: -0.011815847, y: 0.000050677063, z: 0.011150379}
+--- !u!114 &3774521859880115117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037524317049154392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52246590dc7f68941b1f16345970a4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6089147431252128671
 GameObject:
   m_ObjectHideFlags: 0
