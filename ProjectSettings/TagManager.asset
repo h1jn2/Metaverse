@@ -12,6 +12,7 @@ TagManager:
   - CheckPoint
   - Wall
   - Dalgona
+  - UiManager
   layers:
   - Default
   - TransparentFX

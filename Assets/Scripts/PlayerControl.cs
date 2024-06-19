@@ -22,32 +22,36 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (gameManager.isStart)
         {
-            if (!gameStarted)
+            if (Input.GetMouseButton(0))
             {
-                startPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                gameStarted = true;
+                if (!gameStarted)
+                {
+                    startPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    gameStarted = true;
+                }
+
+                isMoving = true;
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                transform.position = mousePosition;
+
+                Debug.Log("Passed Checkpoints: " + passedCheckpointsCnt);
+            }
+            else
+            {
+                if (isMoving)
+                {
+                    gameManager.GameOver();
+                }
+
+                isMoving = false;
             }
 
-            isMoving = true;
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePosition;
-
-            Debug.Log("Passed Checkpoints: " + passedCheckpointsCnt);
-        }
-        else
-        {
-            if (isMoving)
+            if (gameStarted && passedCheckpointsCnt >= 4 && Vector2.Distance(transform.position, startPosition) < 15f)
             {
-                gameManager.GameOver();
+                gameManager.GameClear();
             }
-            isMoving = false;
-        }
-
-        if (gameStarted && passedCheckpointsCnt >= 4 && Vector2.Distance(transform.position, startPosition) < 15f)
-        {
-            gameManager.GameClear();
         }
     }
  
@@ -62,5 +66,6 @@ public class PlayerControl : MonoBehaviour
         {
             gameManager.GameOver();
         }
+        
     }
 }

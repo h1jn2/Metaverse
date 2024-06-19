@@ -217,10 +217,6 @@ public class Character_Controller : MonoBehaviour
             {
                 other.GetComponent<DalgonaAtiveManager>().LoadSceneAdditive();
             }
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                other.GetComponent<DalgonaAtiveManager>().UnLoadScenceAdditive();
-            }
             
         }
     }
