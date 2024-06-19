@@ -21,12 +21,16 @@ public class Item : MonoBehaviourPun
 
     private void Update()
     {
-        transform.Rotate(new Vector3(0, 90, 0) * Time.deltaTime);
+        transform.Rotate(new Vector3(0, 0, 90) * Time.deltaTime);
     }
 
     [PunRPC]
     public void Destroy_RPC()
     {
-        PhotonNetwork.Destroy(this.gameObject);
+        if (PhotonManager.instance.is_Master)
+        {
+            PhotonNetwork.Destroy(this.gameObject);    
+        }
+        
     }
 }

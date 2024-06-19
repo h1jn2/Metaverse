@@ -31,7 +31,7 @@ public class RandomRespawn : MonoBehaviour
 
     public IEnumerator SpawnPrefabs()
     {
-        while (true)
+        while (PhotonManager.instance.is_Master)
         {
             float range_X = rangeCollider.bounds.size.x; 
             float range_Z = rangeCollider.bounds.size.z;
