@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviourPun
 
     void Start()
     {
+        /*
         if (GetComponent<PhotonView>().IsMine)
         {
             this.gameObject.name += "(LocalPlayer)";
@@ -38,6 +39,7 @@ public class PlayerManager : MonoBehaviourPun
             this.gameObject.name += "(OtherPlayer)";
             UI.gameObject.SetActive(false);
         }
+        */
     }
 
     void Update()
@@ -59,5 +61,20 @@ public class PlayerManager : MonoBehaviourPun
     public void SetUI_RPC(string JobInput, string ItemCount,string time)
     {
         this.transform.GetChild(2).GetComponent<GyeongdoUIManger>().SetGyeongdoUI(JobInput,ItemCount,time);
+    }
+
+    [PunRPC]
+    public void StartUI_RPC(bool isStart)
+    {
+        if (isStart)
+        {
+            if (pv.IsMine)
+            {
+                this.transform.GetChild(2).gameObject.SetActive(isStart);
+                this.transform.GetChild(2).GetComponent<GyeongdoUIManger>().isStart = isStart;
+                
+            }
+            
+        }
     }
 }

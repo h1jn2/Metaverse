@@ -3643,13 +3643,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 250138941097148747, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 799966212237035992, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263359282901887154, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4113826858864842989, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
       propertyPath: m_text
-      value: 03:00
+      value: 03
       objectReference: {fileID: 0}
     - target: {fileID: 4905308946919881860, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905308946919881860, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9217765249622184325, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
       propertyPath: m_text

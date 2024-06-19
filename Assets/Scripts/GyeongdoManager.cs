@@ -14,6 +14,9 @@ public class GyeondoManager : MonoBehaviour
     private bool isPlaying;
     [SerializeField]
     private float time = 0;
+    private int CountTime = 0;
+    public bool isWatting;
+    
     public GameObject UIManager;
 
     private int thiefCount;
@@ -31,12 +34,15 @@ public class GyeondoManager : MonoBehaviour
         if (playerCollisions.Count > 0 && !isPlaying)
         {
             StartTimer(5f);
-            UIManager.GetComponent<GyeongdoUIManger>().SetGyeongdoUI(playerCollisions[0].GetComponent<PlayerManager>().Pjob.ToString(), playerCollisions[0].GetComponent<PickUpItem>().itemCount.ToString(), time.ToString());
+            isWatting = true;
+        }
+        else
+        {
+            isWatting = false;
         }
         if (isPlaying)
         {
             StartTimer(playTime);
-            UIManager.GetComponent<GyeongdoUIManger>().SetGyeongdoUI(playerCollisions[0].GetComponent<PlayerManager>().Pjob.ToString(), playerCollisions[0].GetComponent<PickUpItem>().itemCount.ToString(), time.ToString());
         }
         if (thiefCount != 0 && Character_Controller.catchCount == thiefCount)
         {
@@ -47,6 +53,8 @@ public class GyeondoManager : MonoBehaviour
     private void StartTimer(float setTimer)
     {
         time += Time.deltaTime;
+        CountTime = Mathf.FloorToInt(time);
+        Debug.Log(CountTime);
 
         if (time > setTimer)
         {
@@ -83,7 +91,8 @@ public class GyeondoManager : MonoBehaviour
                 thiefCount++;
             }
             Setpv.RPC("SetStatus_RPC",RpcTarget.All,PlayerManager.status._hideseek);
-            Setpv.RPC("SetUI_RPC",RpcTarget.All,shufflePlayer[i].GetComponent<PlayerManager>().Pjob.ToString(),shufflePlayer[i].GetComponent<PickUpItem>().itemCount.ToString(),time.ToString());
+            Setpv.RPC("StartUI_RPC",RpcTarget.All,true);
+            Setpv.RPC("SetUI_RPC",RpcTarget.All,shufflePlayer[i].GetComponent<PlayerManager>().Pjob.ToString(),shufflePlayer[i].GetComponent<PickUpItem>().itemCount.ToString(),"03");
             //shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._hideseek;
         }
         
@@ -111,6 +120,9 @@ public class GyeondoManager : MonoBehaviour
             PhotonView Setpv = playerCollisions[i].GetPhotonView();
             Setpv.RPC("SetJob_RPC",RpcTarget.All,PlayerManager.job.none);
             Setpv.RPC("SetStatus_RPC",RpcTarget.All,PlayerManager.status._none);
+            Setpv.RPC("SetUI_RPC",RpcTarget.All,"Job","0","00");
+            Setpv.RPC("StartUI_RPC",RpcTarget.All,false);
+            
             
             //playerCollisions[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.none;
             //playerCollisions[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
