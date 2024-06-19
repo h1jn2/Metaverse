@@ -23,10 +23,9 @@ public class GyeongdoUIManger : MonoBehaviour
 
     public void SetGyeongdoUI(string job, string itemCount, string time)
     {
-        Debug.Log("UI" + job + itemCount + time);
-            jobText.text = job;
-            itemCountText.text = itemCount;
-            timerText.text = time;
+        jobText.text = job;
+        itemCountText.text = itemCount;
+        timerText.text = time;
 
     }
 }

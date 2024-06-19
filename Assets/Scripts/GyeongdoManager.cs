@@ -12,6 +12,7 @@ public class GyeondoManager : MonoBehaviour
     private List<GameObject> playerCollisions;
     private float playTime = 300f;
     private bool isPlaying;
+    private bool isReady;
     [SerializeField]
     private float time = 0;
     public GameObject UIManager;
@@ -28,25 +29,42 @@ public class GyeondoManager : MonoBehaviour
 
     private void Update()
     {
-        if (playerCollisions.Count > 0 && !isPlaying)
+        if (!isPlaying)
         {
-            StartTimer(5f);
-            UpdateUI();
+            if (playerCollisions.Count > 1)
+            {
+                isReady = true;
+                StartTimer(5f);
+                UpdateUI();
+            }
+            else
+            {
+                isReady= false;
+                time = 0;
+                UpdateUI();
+            }
         }
-        if (isPlaying)
+        else
         {
             StartTimer(playTime);
             UpdateUI();
         }
-        if (thiefCount != 0 && Character_Controller.catchCount == thiefCount)
+
+        if (thiefCount != 0 && Character_Controller.catchCount == thiefCount && isPlaying)
         {
             SettingEndGame();
+            UpdateUI();
         }
     }
 
     private void StartTimer(float setTimer)
     {
-        time += Time.deltaTime;
+        if (isReady)
+        {
+            time += Time.deltaTime;
+        }
+
+
 
         if (time > setTimer)
         {
@@ -58,7 +76,6 @@ public class GyeondoManager : MonoBehaviour
             {
                 SettingEndGame();
             }
-            
         }
     }
 
@@ -135,6 +152,7 @@ public class GyeondoManager : MonoBehaviour
         }
         time = 0;
         isPlaying = false;
+        isReady = false;
         StopCoroutine(RandomRespawn.instance.SpawnPrefabs());
         playerCollisions.Clear();
     }
