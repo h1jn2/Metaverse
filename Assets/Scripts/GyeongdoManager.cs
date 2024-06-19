@@ -14,6 +14,7 @@ public class GyeondoManager : MonoBehaviour
     private bool isPlaying;
     [SerializeField]
     private float time = 0;
+    public GameObject UIManager;
 
     private int thiefCount;
 
@@ -24,16 +25,18 @@ public class GyeondoManager : MonoBehaviour
 
         return shuffled;
     }
-    
+
     private void Update()
     {
         if (playerCollisions.Count > 0 && !isPlaying)
         {
             StartTimer(5f);
+            UIManager.GetComponent<GyeongdoUIManger>().SetGyeongdoUI(playerCollisions[0].GetComponent<PlayerManager>().Pjob.ToString(), playerCollisions[0].GetComponent<PickUpItem>().itemCount.ToString(), time.ToString());
         }
         if (isPlaying)
         {
             StartTimer(playTime);
+            UIManager.GetComponent<GyeongdoUIManger>().SetGyeongdoUI(playerCollisions[0].GetComponent<PlayerManager>().Pjob.ToString(), playerCollisions[0].GetComponent<PickUpItem>().itemCount.ToString(), time.ToString());
         }
         if (thiefCount != 0 && Character_Controller.catchCount == thiefCount)
         {
@@ -93,6 +96,7 @@ public class GyeondoManager : MonoBehaviour
         Debug.Log("StartGyeongdo()");
         isPlaying = true;
         time = 0;
+
         StartCoroutine(RandomRespawn.instance.SpawnPrefabs());
         
     }

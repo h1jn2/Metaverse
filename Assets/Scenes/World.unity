@@ -1517,6 +1517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollisions: []
   time: 0
+  UIManager: {fileID: 4905308946919881860, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
 --- !u!64 &6697621764703351598
 MeshCollider:
   m_ObjectHideFlags: 0

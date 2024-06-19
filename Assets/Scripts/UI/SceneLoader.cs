@@ -5,32 +5,32 @@ using System.Collections;
 
 public class SceneLoader : MonoBehaviour
 {
-    public string Scene_2; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
-    public float transitionDuration = 1.0f; // ï¿½ï¿½È¯ ï¿½Ã°ï¿½
+    public string Scene_2; // ´ÙÀ½À¸·Î ÀÌµ¿ÇÒ ¾ÀÀÇ ÀÌ¸§
+    public float transitionDuration = 1.0f; // ÀüÈ¯ ½Ã°£
 
     private Button button;
 
     void Start()
     {
-        button = GetComponent<Button>(); // ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        button = GetComponent<Button>(); // ¹öÆ° ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
 
-        // ï¿½ï¿½Æ°ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+        // ¹öÆ°¿¡ Å¬¸¯ ÀÌº¥Æ® ¸®½º³Ê Ãß°¡
         button.onClick.AddListener(ChangeScene);
     }
 
     void ChangeScene()
     {
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ñµ¿±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
+        // ´ÙÀ½ ¾ÀÀ» ºñµ¿±âÀûÀ¸·Î ·Îµå
         StartCoroutine(LoadNextScene());
     }
 
     IEnumerator LoadNextScene()
     {
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ñµ¿±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
+        // ´ÙÀ½ ¾ÀÀ» ºñµ¿±âÀûÀ¸·Î ·Îµå
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(Scene_2, LoadSceneMode.Single);
-        asyncLoad.allowSceneActivation = false;
+        asyncLoad.allowSceneActivation = false; // ¾À È°¼ºÈ­¸¦ Áö¿¬½ÃÅ´
 
-        // ï¿½ï¿½È¯ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        // ÀüÈ¯ ½Ã°£ µ¿¾È ´ë±â
         float elapsedTime = 0;
         while (elapsedTime < transitionDuration)
         {
@@ -38,7 +38,7 @@ public class SceneLoader : MonoBehaviour
             yield return null;
         }
 
-        // ï¿½Îµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
+        // ·ÎµåµÈ ¾ÀÀ» È°¼ºÈ­
         asyncLoad.allowSceneActivation = true;
     }
 }
