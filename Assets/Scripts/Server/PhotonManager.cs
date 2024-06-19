@@ -16,6 +16,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public static PhotonManager instance;
     public bool isLoading;
     public static AsyncOperation SceneLoingsync;
+    public bool is_Master;
 
 
     //게임을 실행중 포톤매니저는 무조건 하나만 있어야되기때문에 싱클톤으로 실행
@@ -107,7 +108,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public GameObject SpawnItem(Vector3 position)
     {
         Debug.Log("SpawnItem()");
-        return PhotonNetwork.Instantiate(list_Prefabs[1].name, position, Quaternion.identity);
+        return PhotonNetwork.Instantiate(list_Prefabs[1].name, position, Quaternion.Euler(-90, 0, 0));
     }
 
     private void Spawn_item()
@@ -135,10 +136,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             PhotonNetwork.CurrentRoom.SetCustomProperties(new Hashtable(){{"RoomState", "Waiting"}});
             LoadArea();
             OnStartCreatePlayer();
+            is_Master = true;
         }
         if (!PhotonNetwork.IsMasterClient)
         {
             m_CreatePlayer(LocalDate);
+            is_Master = false;
         }
     }
 
