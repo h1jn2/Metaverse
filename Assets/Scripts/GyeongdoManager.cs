@@ -83,6 +83,7 @@ public class GyeondoManager : MonoBehaviour
                 thiefCount++;
             }
             Setpv.RPC("SetStatus_RPC",RpcTarget.All,PlayerManager.status._hideseek);
+            Setpv.RPC("SetUI_RPC",RpcTarget.All,shufflePlayer[i].GetComponent<PlayerManager>().Pjob.ToString(),shufflePlayer[i].GetComponent<PickUpItem>().itemCount.ToString(),time.ToString());
             //shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._hideseek;
         }
         

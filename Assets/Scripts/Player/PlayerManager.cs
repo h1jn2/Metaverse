@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 public class PlayerManager : MonoBehaviourPun
 {
     public PhotonView pv;
+    public Canvas UI;
     public enum status
     {
         _none,
@@ -27,7 +28,16 @@ public class PlayerManager : MonoBehaviourPun
 
     void Start()
     {
-
+        if (GetComponent<PhotonView>().IsMine)
+        {
+            this.gameObject.name += "(LocalPlayer)";
+            
+        }
+        else
+        {
+            this.gameObject.name += "(OtherPlayer)";
+            UI.gameObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -43,5 +53,11 @@ public class PlayerManager : MonoBehaviourPun
     public void SetStatus_RPC(status input)
     {
         this.Pstatus = input;
+    }
+
+    [PunRPC]
+    public void SetUI_RPC(string JobInput, string ItemCount,string time)
+    {
+        this.transform.GetChild(2).GetComponent<GyeongdoUIManger>().SetGyeongdoUI(JobInput,ItemCount,time);
     }
 }

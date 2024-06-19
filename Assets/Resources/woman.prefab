@@ -1036,6 +1036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pv: {fileID: 1542356141746554044}
+  UI: {fileID: 6546947586942946485}
   Pstatus: 0
   Pjob: 0
 --- !u!114 &9117896936227561931
@@ -3659,6 +3660,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
+--- !u!223 &6546947586942946485 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4461981003169214321, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}
+  m_PrefabInstance: {fileID: 7437494881031087044}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7347091318621166451 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 198535038820792503, guid: 2801cfc065fc1ae4ab7e617656b730af, type: 3}

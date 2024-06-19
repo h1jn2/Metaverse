@@ -15,7 +15,7 @@ public class GyeongdoUIManger : MonoBehaviour
 
     private void Awake()
     {
-        //pv = GetComponentInParent<PhotonView>();
+        pv = GetComponentInParent<PhotonView>();
         Debug.Log("jobText: " + (jobText != null));
         Debug.Log("itemCountText: " + (itemCountText != null));
         Debug.Log("timerText: " + (timerText != null));
@@ -24,11 +24,9 @@ public class GyeongdoUIManger : MonoBehaviour
     public void SetGyeongdoUI(string job, string itemCount, string time)
     {
         Debug.Log("UI" + job + itemCount + time);
-        //if (pv.IsMine)
-        //{
-        jobText.text = job;
+            jobText.text = job;
             itemCountText.text = itemCount;
             timerText.text = time;
-        //}
+
     }
 }
