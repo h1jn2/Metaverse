@@ -14,6 +14,7 @@ public class RandomRespawn : MonoBehaviour
     private List<GameObject> item_prefabs;
 
     private PhotonView pv;
+    private PhotonView ipv;
     
 
     private void Awake()
@@ -51,6 +52,8 @@ public class RandomRespawn : MonoBehaviour
                     }
                     else
                     {
+                        //ipv = item_prefabs[0].GetComponent<PhotonView>();
+                        //ipv.RPC("Destroy_RPC",RpcTarget.All);
                         PhotonNetwork.Destroy(item_prefabs[0]);
                         item_prefabs.RemoveAt(0);
                     }
