@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 3406138470082907750}
   - component: {fileID: 7192902298347577039}
   m_Layer: 0
-  m_Name: Cube.016
+  m_Name: Dalgona
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

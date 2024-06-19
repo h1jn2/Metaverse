@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         SugarManager = GameObject.FindGameObjectWithTag("SugarManager").GetComponent<SugarManager>();
-        rb = GetComponent<Rigidbody2D>();
+        rb = this.gameObject.GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
     }
 

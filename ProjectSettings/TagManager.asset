@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Item
   - Seesaw
+  - GameManager
+  - SugarManager
   layers:
   - Default
   - TransparentFX
