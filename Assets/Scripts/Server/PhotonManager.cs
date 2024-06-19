@@ -106,6 +106,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public GameObject SpawnItem(Vector3 position)
     {
+        Debug.Log("SpawnItem()");
         return PhotonNetwork.Instantiate(list_Prefabs[1].name, position, Quaternion.identity);
     }
 

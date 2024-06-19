@@ -42,6 +42,8 @@ MonoBehaviour:
   - Destroy_RPC
   - SetJob_RPC
   - SetStatus_RPC
+  - listDelete_RPC
+  - listup_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
