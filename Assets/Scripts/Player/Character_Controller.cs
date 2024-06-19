@@ -34,6 +34,7 @@ public class Character_Controller : MonoBehaviour
     private bool _isJump;
     private bool _isGround;
     private bool _isSitting;
+    private bool _isDalgona;
 
     public bool _startarea;
 
@@ -64,7 +65,7 @@ public class Character_Controller : MonoBehaviour
     // Update is called once per frame
     private void LateUpdate()
     {
-        if (pv.IsMine)
+        if (pv.IsMine && !DalgonaAtiveManager.isDalgona)
         {
             float pos_x = Input.GetAxis("Horizontal");
             float pos_z = Input.GetAxis("Vertical");
@@ -211,7 +212,7 @@ public class Character_Controller : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Dalgona"))
+        if (other.CompareTag("Dalgona") && !DalgonaAtiveManager.isDalgona)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {

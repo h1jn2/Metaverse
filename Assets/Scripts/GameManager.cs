@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("SampleScene"));
+        isStart = false;
         isClear = false;
         isOver = false;
     }
