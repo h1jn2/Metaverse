@@ -66,15 +66,11 @@ public class PlayerManager : MonoBehaviourPun
     [PunRPC]
     public void StartUI_RPC(bool isStart)
     {
-        if (isStart)
-        {
             if (pv.IsMine)
             {
                 this.transform.GetChild(2).gameObject.SetActive(isStart);
                 this.transform.GetChild(2).GetComponent<GyeongdoUIManger>().isStart = isStart;
                 
             }
-            
-        }
     }
 }

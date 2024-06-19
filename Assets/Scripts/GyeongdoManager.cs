@@ -137,6 +137,8 @@ public class GyeondoManager : MonoBehaviour
             //Destroy(items[i]);
         }
         time = 0;
+        thiefCount = 0;
+        Character_Controller.catchCount = 0;
         isPlaying = false;
         StopCoroutine(RandomRespawn.instance.SpawnPrefabs());
         playerCollisions.Clear();
