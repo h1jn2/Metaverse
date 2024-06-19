@@ -31,12 +31,12 @@ public class GyeondoManager : MonoBehaviour
         if (playerCollisions.Count > 0 && !isPlaying)
         {
             StartTimer(5f);
-            UIManager.GetComponent<GyeongdoUIManger>().SetGyeongdoUI(playerCollisions[0].GetComponent<PlayerManager>().Pjob.ToString(), playerCollisions[0].GetComponent<PickUpItem>().itemCount.ToString(), time.ToString());
+            UpdateUI();
         }
         if (isPlaying)
         {
             StartTimer(playTime);
-            UIManager.GetComponent<GyeongdoUIManger>().SetGyeongdoUI(playerCollisions[0].GetComponent<PlayerManager>().Pjob.ToString(), playerCollisions[0].GetComponent<PickUpItem>().itemCount.ToString(), time.ToString());
+            UpdateUI();
         }
         if (thiefCount != 0 && Character_Controller.catchCount == thiefCount)
         {
@@ -62,6 +62,16 @@ public class GyeondoManager : MonoBehaviour
         }
     }
 
+    private void UpdateUI()
+    {
+        for (int i = 0; i < playerCollisions.Count; i++)
+        {
+            PhotonView Setpv = playerCollisions[i].GetPhotonView();
+
+            Setpv.RPC("SetUI_RPC", RpcTarget.All, playerCollisions[i].GetComponent<PlayerManager>().Pjob.ToString(), playerCollisions[i].GetComponent<PickUpItem>().itemCount.ToString(), Math.Round(time).ToString());
+        }
+    }
+
     private void SettingStartGame()
     {
         Debug.Log("SettingStartGame()");
@@ -83,7 +93,6 @@ public class GyeondoManager : MonoBehaviour
                 thiefCount++;
             }
             Setpv.RPC("SetStatus_RPC",RpcTarget.All,PlayerManager.status._hideseek);
-            Setpv.RPC("SetUI_RPC",RpcTarget.All,shufflePlayer[i].GetComponent<PlayerManager>().Pjob.ToString(),shufflePlayer[i].GetComponent<PickUpItem>().itemCount.ToString(),time.ToString());
             //shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._hideseek;
         }
         
@@ -97,7 +106,7 @@ public class GyeondoManager : MonoBehaviour
         Debug.Log("StartGyeongdo()");
         isPlaying = true;
         time = 0;
-
+        
         StartCoroutine(RandomRespawn.instance.SpawnPrefabs());
         
     }
