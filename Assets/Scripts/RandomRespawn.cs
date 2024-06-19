@@ -46,7 +46,7 @@ public class RandomRespawn : MonoBehaviour
                     // 충돌 지점에 프리팹 생성
                     Debug.Log("hit");
                     //PhotonManager.instance.SpawnItem(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z));
-                    item_prefabs.Add(PhotonManager.instance.SpawnItem(new Vector3(hit.point.x, hit.point.y, hit.point.z)));
+                    item_prefabs.Add(PhotonManager.instance.SpawnItem(new Vector3(hit.point.x, hit.point.y + 1f, hit.point.z)));
                     yield return new WaitForSeconds(15f);
                     }
                     else
