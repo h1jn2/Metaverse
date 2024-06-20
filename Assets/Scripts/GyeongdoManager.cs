@@ -46,12 +46,12 @@ public class GyeondoManager : MonoBehaviour
             StartTimer(5f);
             isWatting = true;
         }
-        else
+        else if(!isPlaying)
         {
             isWatting = false;
             time = 0;
         }
-
+        Debug.Log(time);
         if (!isPlaying)
         {
             for (int i = 0; i < playerCollisions.Count; i++)
