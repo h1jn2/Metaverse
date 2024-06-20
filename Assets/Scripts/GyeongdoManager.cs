@@ -16,6 +16,8 @@ public class GyeondoManager : MonoBehaviour
     private float time = 0;
     private int CountTime = 0;
     public bool isWatting;
+    public bool isPoliceWin;
+    public bool isGameEnd;
     
     public GameObject UIManager;
 
@@ -46,6 +48,7 @@ public class GyeondoManager : MonoBehaviour
         }
         if (thiefCount != 0 && Character_Controller.catchCount == thiefCount)
         {
+            isPoliceWin = true;
             SettingEndGame();
         }
     }
@@ -65,6 +68,7 @@ public class GyeondoManager : MonoBehaviour
             else
             {
                 SettingEndGame();
+                isPoliceWin = false;
             }
             
         }
@@ -93,9 +97,10 @@ public class GyeondoManager : MonoBehaviour
             Setpv.RPC("SetStatus_RPC",RpcTarget.All,PlayerManager.status._hideseek);
             Setpv.RPC("StartUI_RPC",RpcTarget.All,true);
             Setpv.RPC("SetUI_RPC",RpcTarget.All,shufflePlayer[i].GetComponent<PlayerManager>().Pjob.ToString(),shufflePlayer[i].GetComponent<PickUpItem>().itemCount.ToString(),"03");
+
             //shufflePlayer[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._hideseek;
         }
-        
+
 
         StartGyeondo();
 
@@ -114,6 +119,7 @@ public class GyeondoManager : MonoBehaviour
     public void SettingEndGame()
     {
         Debug.Log("SettingEndGame()");
+        isGameEnd = true;
         
         for (int i = 0; i < playerCollisions.Count; i++)
         {
@@ -122,6 +128,7 @@ public class GyeondoManager : MonoBehaviour
             Setpv.RPC("SetStatus_RPC",RpcTarget.All,PlayerManager.status._none);
             Setpv.RPC("SetUI_RPC",RpcTarget.All,"Job","0","00");
             Setpv.RPC("StartUI_RPC",RpcTarget.All,false);
+            Setpv.RPC("SetUI_GameResult", RpcTarget.All,isPoliceWin, isGameEnd);
             
             
             //playerCollisions[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.none;

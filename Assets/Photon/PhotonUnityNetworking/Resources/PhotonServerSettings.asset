@@ -46,6 +46,7 @@ MonoBehaviour:
   - listup_RPC
   - SetUI_RPC
   - StartUI_RPC
+  - SetUI_GameResult
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

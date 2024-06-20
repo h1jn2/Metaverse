@@ -17,7 +17,9 @@ public class PickUpItem : MonoBehaviour
     {
         if (itemCount == 5)
         {
+            gyeongdoMng.GetComponent<GyeondoManager>().isPoliceWin = false;
             gyeongdoMng.GetComponent<GyeondoManager>().SettingEndGame();
+
         }
     }
 

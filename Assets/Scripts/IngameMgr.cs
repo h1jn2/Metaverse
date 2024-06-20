@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneMgr : MonoBehaviour
+public class IngameMgr : MonoBehaviour
 {
-    public static SceneMgr single { get; private set; }
+    public static IngameMgr single { get; private set; }
 
     [SerializeField] private CanvasGroup panelScene1;
     [SerializeField] private CanvasGroup panelScene2;

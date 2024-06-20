@@ -25,12 +25,21 @@ public class GyeongdoUIManger : MonoBehaviour
     private int CountSec = 0;
     private int WaittingCount;
 
+    public GameObject policeWinUI;
+    public GameObject thiefWinUI;
+    public GameObject OkButton;
+    public GameObject inGameUI;
+    public GameObject resultUI;
+
     private void Awake()
     {
         pv = GetComponentInParent<PhotonView>();
         Debug.Log("jobText: " + (jobText != null));
         Debug.Log("itemCountText: " + (itemCountText != null));
         Debug.Log("timerText: " + (timerText != null));
+        policeWinUI.SetActive(false);
+        thiefWinUI.SetActive(false);
+        OkButton.SetActive(false);
     }
 
     private void Update()
@@ -76,10 +85,38 @@ public class GyeongdoUIManger : MonoBehaviour
 
     public void SetGyeongdoUI(string job, string itemCount, string time)
     {
-        Debug.Log("UI" + job + itemCount + time);
+        if (isStart)
+        {
+            inGameUI.SetActive(true);
             jobText.text = job;
             itemCountText.text = itemCount;
             timerText.text = time;
+        }
+    }
 
+    public void SetGameResultUI(bool _isPoliceWin, bool _isGameEnd)
+    {
+        if (_isGameEnd)
+        {
+            if (_isPoliceWin)
+            {
+                policeWinUI.SetActive(true);
+                thiefWinUI.SetActive(false);
+                OkButton.SetActive(true);
+                inGameUI.SetActive(false);
+            }
+            else
+            {
+                policeWinUI.SetActive(false);
+                thiefWinUI.SetActive(true);
+                OkButton.SetActive(true);
+                inGameUI.SetActive(false);
+            }
+        }
+    }
+
+    public void onClick_OK_Button()
+    {
+        resultUI.SetActive(false);
     }
 }
