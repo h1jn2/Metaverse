@@ -15,6 +15,7 @@ public class GyeongdoUIManger : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text MinText;
     public TMP_Text SecText;
+    public TMP_Text CountText;
     public bool isStart;
     public bool isWatting;
     
@@ -25,30 +26,33 @@ public class GyeongdoUIManger : MonoBehaviour
     private int CountSec = 0;
     private int WaittingCount;
 
-    public GameObject policeWinUI;
-    public GameObject thiefWinUI;
-    public GameObject OkButton;
-    public GameObject inGameUI;
-    public GameObject resultUI;
+    public CanvasGroup policeWinUI;
+    public CanvasGroup thiefWinUI;
+    //public GameObject OkButton;
+    public Canvas inGameUI;
+    public Canvas resultUI;
+    public Canvas CountUI;
 
     private void Awake()
     {
-        pv = GetComponentInParent<PhotonView>();
         Debug.Log("jobText: " + (jobText != null));
         Debug.Log("itemCountText: " + (itemCountText != null));
         Debug.Log("timerText: " + (timerText != null));
-        policeWinUI.SetActive(false);
-        thiefWinUI.SetActive(false);
-        OkButton.SetActive(false);
+        resultUI.gameObject.SetActive(false);
+        //policeWinUI.gameObject.SetActive(false);
+        //thiefWinUI.gameObject.SetActive(false);
+        //OkButton.SetActive(false);
     }
 
     private void Update()
     {
         
         if (isWatting && !isStart)
-        {
+        {  
             time += Time.deltaTime;
             WaittingCount = 5-Mathf.FloorToInt(time);
+            CountText.text = WaittingCount.ToString();
+
         }
         else
         {
@@ -76,7 +80,7 @@ public class GyeongdoUIManger : MonoBehaviour
             SecText.text = CountSec.ToString();
             MinText.text = CountMin.ToString();
         }
-        else
+        else if(!isWatting)
         {
             time = 0f;
             CountTime = 0;
@@ -87,36 +91,45 @@ public class GyeongdoUIManger : MonoBehaviour
     {
         if (isStart)
         {
-            inGameUI.SetActive(true);
+            Debug.Log("인게임 UI");
+            inGameUI.gameObject.SetActive(true);
+            CountUI.gameObject.SetActive(false);
             jobText.text = job;
             itemCountText.text = itemCount;
             timerText.text = time;
         }
     }
 
+    public void SetCountDownUI(bool isWating)
+    {
+        isWatting = isWating;
+        CountUI.gameObject.SetActive(isWating);
+    }
     public void SetGameResultUI(bool _isPoliceWin, bool _isGameEnd)
     {
+        Debug.LogWarning("경도 끝");
         if (_isGameEnd)
         {
+            resultUI.gameObject.SetActive(true);
             if (_isPoliceWin)
             {
-                policeWinUI.SetActive(true);
-                thiefWinUI.SetActive(false);
-                OkButton.SetActive(true);
-                inGameUI.SetActive(false);
+                policeWinUI.gameObject.SetActive(true);
+                thiefWinUI.gameObject.SetActive(false);
+                //OkButton.SetActive(true);
+                inGameUI.gameObject.SetActive(false);
             }
             else
             {
-                policeWinUI.SetActive(false);
-                thiefWinUI.SetActive(true);
-                OkButton.SetActive(true);
-                inGameUI.SetActive(false);
+                policeWinUI.gameObject.SetActive(false);
+                thiefWinUI.gameObject.SetActive(true);
+                //OkButton.SetActive(true);
+                inGameUI.gameObject.SetActive(false);
             }
         }
     }
 
     public void onClick_OK_Button()
     {
-        resultUI.SetActive(false);
+        resultUI.gameObject.SetActive(false);
     }
 }

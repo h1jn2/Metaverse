@@ -60,7 +60,17 @@ public class PlayerManager : MonoBehaviourPun
     [PunRPC]
     public void SetUI_RPC(string JobInput, string ItemCount,string time)
     {
-        this.transform.GetChild(4).GetComponent<GyeongdoUIManger>().SetGyeongdoUI(JobInput,ItemCount,time);
+        this.transform.GetChild(5).GetComponent<GyeongdoUIManger>().SetGyeongdoUI(JobInput,ItemCount,time);
+    }
+
+    [PunRPC]
+    public void SetWait_RPC(bool isWating)
+    {
+        if (pv.IsMine)
+        {
+            Debug.Log(isWating);
+            this.transform.GetChild(5).GetComponent<GyeongdoUIManger>().SetCountDownUI(isWating);
+        }
     }
 
     [PunRPC]
@@ -68,12 +78,15 @@ public class PlayerManager : MonoBehaviourPun
     {
             if (pv.IsMine)
             {
-                this.transform.GetChild(4).GetComponent<GyeongdoUIManger>().isStart = isStart;
+                this.transform.GetChild(5).GetComponent<GyeongdoUIManger>().isStart = isStart;
             }
     }
     [PunRPC]
     public void SetUI_GameResult(bool _isPoliceWin, bool _isGameEnd)
     {
-        this.transform.GetChild(4).GetComponent<GyeongdoUIManger>().SetGameResultUI(_isPoliceWin, _isGameEnd);
+        if (pv.IsMine)
+        {
+            this.transform.GetChild(5).GetComponent<GyeongdoUIManger>().SetGameResultUI(_isPoliceWin, _isGameEnd);
+        }
     }
 }

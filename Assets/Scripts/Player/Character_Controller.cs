@@ -177,6 +177,7 @@ public class Character_Controller : MonoBehaviour
                 //obj_Rotate_Horizontal.transform.eulerAngles += new Vector3(0, rot_y, 0) * f_RotateSpeed;
                 transform.eulerAngles += new Vector3(0, rot_y, 0) * f_RotateSpeed;
             }
+            rb.angularVelocity = Vector3.zero;
         }
     }
 
@@ -187,7 +188,7 @@ public class Character_Controller : MonoBehaviour
         {
             _isJump = false;
             _isGround = true;
-            rb.angularVelocity = Vector3.zero;
+            
         }
         if (other.gameObject.CompareTag("Player"))
         {

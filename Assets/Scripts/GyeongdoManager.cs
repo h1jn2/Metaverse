@@ -49,7 +49,18 @@ public class GyeondoManager : MonoBehaviour
         else
         {
             isWatting = false;
+            time = 0;
         }
+
+        if (!isPlaying)
+        {
+            for (int i = 0; i < playerCollisions.Count; i++)
+            {
+                PhotonView pv = playerCollisions[i].GetPhotonView();
+                pv.RPC("SetWait_RPC",RpcTarget.All,isWatting);
+            }    
+        }
+          
         if (isPlaying)
         {
             StartTimer(playTime);
@@ -65,8 +76,6 @@ public class GyeondoManager : MonoBehaviour
     {
         time += Time.deltaTime;
         CountTime = Mathf.FloorToInt(time);
-        Debug.Log(CountTime);
-
         if (time > setTimer)
         {
             if (!isPlaying)
@@ -185,6 +194,8 @@ public class GyeondoManager : MonoBehaviour
             {
                 playerCollisions.Remove(collision.gameObject);
                 collision.gameObject.GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
+                PhotonView pv = collision.gameObject.GetPhotonView();
+                pv.RPC("SetWait_RPC",RpcTarget.All,false);
             }
             
         }
