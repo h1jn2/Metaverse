@@ -212,7 +212,7 @@ public class Character_Controller : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Dalgona") && !DalgonaAtiveManager.isDalgona)
+        if (other.CompareTag("Dalgona") && !DalgonaAtiveManager.isDalgona && this.gameObject.GetComponent<PlayerManager>().Pjob == PlayerManager.job.none)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
