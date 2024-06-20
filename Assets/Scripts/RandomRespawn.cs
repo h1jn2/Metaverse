@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RandomRespawn : MonoBehaviour
 {
-    public static RandomRespawn instance;
+    //public static RandomRespawn instance;
     public GameObject rangeObject;
     BoxCollider rangeCollider;
     public GameObject prefab;
@@ -15,20 +15,22 @@ public class RandomRespawn : MonoBehaviour
 
     private PhotonView pv;
     private PhotonView ipv;
-    
+    public bool _isPlaying;
+
 
     private void Awake()
     {
-        if (null == instance)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+        //if (null == instance)
+        //{
+        //    instance = this;
+        //    DontDestroyOnLoad(this.gameObject);
 
-        }
+        //}
         rangeCollider = rangeObject.GetComponent<BoxCollider>();
-        pv = this.gameObject.GetPhotonView(); 
+        pv = this.gameObject.GetPhotonView();
         
     }
+
 
     public IEnumerator SpawnPrefabs()
     {

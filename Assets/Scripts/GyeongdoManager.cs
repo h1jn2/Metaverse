@@ -23,12 +23,20 @@ public class GyeondoManager : MonoBehaviour
 
     private int thiefCount;
 
+    public GameObject randomRespawn;
+    private IEnumerator runningCoroutine = null;
+
     public static List<GameObject> Shuffle(List<GameObject> values)
     {
         System.Random rand = new System.Random();
         var shuffled = values.OrderBy(_ => rand.Next()).ToList();
 
         return shuffled;
+    }
+
+    private void Awake()
+    {
+        
     }
 
     private void Update()
@@ -111,9 +119,9 @@ public class GyeondoManager : MonoBehaviour
         Debug.Log("StartGyeongdo()");
         isPlaying = true;
         time = 0;
+        runningCoroutine = randomRespawn.GetComponent<RandomRespawn>().SpawnPrefabs();
 
-        StartCoroutine(RandomRespawn.instance.SpawnPrefabs());
-        
+        StartCoroutine(runningCoroutine);
     }
 
     public void SettingEndGame()
@@ -147,7 +155,11 @@ public class GyeondoManager : MonoBehaviour
         thiefCount = 0;
         Character_Controller.catchCount = 0;
         isPlaying = false;
-        StopCoroutine(RandomRespawn.instance.SpawnPrefabs());
+        if (runningCoroutine != null)
+        {
+            StopCoroutine(runningCoroutine);
+            runningCoroutine = null;
+        }
         playerCollisions.Clear();
     }
 

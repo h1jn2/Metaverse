@@ -373,6 +373,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   item_prefabs: []
+  _isPlaying: 0
 --- !u!4 &1397043728
 Transform:
   m_ObjectHideFlags: 0
@@ -1449,6 +1450,7 @@ MonoBehaviour:
   isPoliceWin: 0
   isGameEnd: 0
   UIManager: {fileID: 2107866576724783858, guid: 8be9ec31653694742b1c9e1cade5b75e, type: 3}
+  randomRespawn: {fileID: 1397043726}
 --- !u!64 &6697621764703351598
 MeshCollider:
   m_ObjectHideFlags: 0
