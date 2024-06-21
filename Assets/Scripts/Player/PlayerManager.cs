@@ -89,4 +89,30 @@ public class PlayerManager : MonoBehaviourPun
             this.transform.GetChild(5).GetComponent<GyeongdoUIManger>().SetGameResultUI(_isPoliceWin, _isGameEnd);
         }
     }
+    [PunRPC]
+    public void SetCap_RPC(bool _isPolice, bool _isGameEnd)
+    {
+        if (pv.IsMine)
+        {
+            if (!_isGameEnd)
+            {
+                if (_isPolice)
+                {
+                    Debug.Log(this.transform.GetChild(1).GetChild(0).gameObject.activeSelf + "active");
+                    this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
+                    this.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+                }
+                else
+                {
+                    this.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
+                    this.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                this.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
+                this.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+            }
+        }
+    }
 }

@@ -103,11 +103,14 @@ public class GyeondoManager : MonoBehaviour
             if (i % 2 == 0)
             {
                 Setpv.RPC("SetJob_RPC",RpcTarget.All, PlayerManager.job.polic);
+                Setpv.RPC("SetCap_RPC", RpcTarget.All, true, false);
                 //shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.polic;
             }
             else
             {
                 Setpv.RPC("SetJob_RPC",RpcTarget.All, PlayerManager.job.theif);
+                Setpv.RPC("SetCap_RPC", RpcTarget.All, false, false);
+
                 //shufflePlayer[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.theif;
                 thiefCount++;
             }
@@ -146,8 +149,9 @@ public class GyeondoManager : MonoBehaviour
             Setpv.RPC("SetUI_RPC",RpcTarget.All,"Job","0","00");
             Setpv.RPC("StartUI_RPC",RpcTarget.All,false);
             Setpv.RPC("SetUI_GameResult", RpcTarget.All,isPoliceWin, isGameEnd);
-            
-            
+            Setpv.RPC("SetCap_RPC", RpcTarget.All, false, true);
+
+
             //playerCollisions[i].GetComponent<PlayerManager>().Pjob = PlayerManager.job.none;
             //playerCollisions[i].GetComponent<PlayerManager>().Pstatus = PlayerManager.status._none;
             playerCollisions[i].GetComponent<PickUpItem>().itemCount = 0;

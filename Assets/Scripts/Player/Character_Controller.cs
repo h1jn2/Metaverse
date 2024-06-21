@@ -181,6 +181,7 @@ public class Character_Controller : MonoBehaviour
         }
     }
 
+
     private void OnCollisionEnter(Collision other)
     {
         

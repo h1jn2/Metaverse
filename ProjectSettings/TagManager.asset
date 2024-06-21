@@ -13,6 +13,8 @@ TagManager:
   - Wall
   - Dalgona
   - UiManager
+  - ThiefCap
+  - PoliceCap
   layers:
   - Default
   - TransparentFX

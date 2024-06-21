@@ -48,6 +48,7 @@ MonoBehaviour:
   - StartUI_RPC
   - SetUI_GameResult
   - SetWait_RPC
+  - SetCap_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
