@@ -115,8 +115,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         
     }
-    
 
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+    
     #region ServerCallBacks
 
     public override void OnConnectedToMaster()
@@ -157,7 +161,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Scene_1");
     }
 
     public override void OnDisconnected(DisconnectCause cause)

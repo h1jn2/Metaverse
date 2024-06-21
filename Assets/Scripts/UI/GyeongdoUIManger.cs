@@ -18,6 +18,7 @@ public class GyeongdoUIManger : MonoBehaviour
     public TMP_Text CountText;
     public bool isStart;
     public bool isWatting;
+    public bool isPause;
     
     private float time =0;
     private float sectime =0;
@@ -32,6 +33,7 @@ public class GyeongdoUIManger : MonoBehaviour
     public Canvas inGameUI;
     public Canvas resultUI;
     public Canvas CountUI;
+    public Canvas PauseUI;
 
     private void Awake()
     {
@@ -85,6 +87,12 @@ public class GyeongdoUIManger : MonoBehaviour
             time = 0f;
             CountTime = 0;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !isPause)
+        {
+            PauseUI.gameObject.SetActive(true);
+            isPause = true;
+        }
     }
 
     public void SetGyeongdoUI(string job, string itemCount, string time)
@@ -131,5 +139,20 @@ public class GyeongdoUIManger : MonoBehaviour
     public void onClick_OK_Button()
     {
         resultUI.gameObject.SetActive(false);
+    }
+
+    public void BtnClickQuit()
+    {
+        Application.Quit();
+    }
+    public void BtnClickMain()
+    {
+        PhotonManager.instance.LeaveRoom();
+    }
+
+    public void BtnClickReturn()
+    {
+        PauseUI.gameObject.SetActive(false);
+        isPause = false;
     }
 }

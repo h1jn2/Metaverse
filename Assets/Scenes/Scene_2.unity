@@ -1467,6 +1467,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1542356141746554044, guid: 138ce8d1d15a80d4591aee403d70be3f, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2577325101096883597, guid: 138ce8d1d15a80d4591aee403d70be3f, type: 3}
       propertyPath: m_Name
       value: woman
